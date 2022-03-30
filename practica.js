@@ -1,69 +1,42 @@
-const sumar = (num1,num2)=>{
-	return parseInt(num1) + parseInt(num2);
+const obtenerInformacion = (materia)=> {
+    materias = {
+        fisica : ["Sabato","pedro","juan","hernesto","jose","leandro"],
+        programacion : ["Borges","pedro","juan","hernesto","jose"],
+        logica : ["Cervantes","pedro","juan","hernesto",,"leandro"],
+        quimica : ["Conrad","pedro","jose","leandro"]
+    }
+    if(materias[materia] !== undefined){
+        return [materias[materia],materia,materias];
+    }else{
+        return materias;
+    }
 }
-const restar = (num1,num2)=>{
-	return parseInt(num1) - parseInt(num2);
+const mostrarInformacion = (materia)=>{
+    let informacion = obtenerInformacion(materia);
+if (informacion !== false){
+    let profesor = obtenerInformacion(materia)[0][0];
+    let alumnos = obtenerInformacion(materia)[0];
+    alumnos.shift()
+    document.write(`el profesor de ${informacion[1]} es : ${profesor} <br> y los alumnos son: ${alumnos}
+    <br><br>
+    `)
 }
-const dividir = (num1,num2)=>{
-	return parseInt(num1) / parseInt(num2);
 }
-const multiplicar = (num1,num2)=>{
-	return parseInt(num1) * parseInt(num2);
+const cantidadDeClases = (alumno)=>{
+    let informacion = obtenerInformacion();
+    let clasesPresentes=[];
+    let cantidadTotal = 0;
+    for (info in informacion){
+        if (informacion[info].includes(alumno)){
+         cantidadTotal++;
+         clasesPresentes.push(" " + info);
+        }
+    }
+    return `${alumno} esta en ${cantidadTotal} clases: ${clasesPresentes}<br><br>`
 }
-const potencia = (num1,exp)=>{
-    return parseInt(num1)**(exp);
-}
-const raizCuadrada = (num1)=>{
-    return Math.sqrt(num1);
-}
-const raizCubica = (num1)=>{
-    return Math.cbrt(num1);
-}
-
-
-alert("¿Que operación deseas realizar?");
-let operacion = prompt("1: suma,  2: resta,  3: división,  4: multiplicación, 5: potencia, 6: raíz cuadrada, 7: raíz cubica");
-
-if (operacion == 1) {
-	let numero1 = prompt("primer número para sumar");
-	let numero2 = prompt("segundo número para sumar");
-	resultado = sumar(numero1,numero2);
-	alert(`tu resultado es ${resultado}`);
-}
-else if (operacion == 2) {
-	let numero1 = prompt("primer número para restar");
-	let numero2 = prompt("segundo número para restar");
-	resultado = restar(numero1,numero2)
-	alert(`tu resultado es ${resultado}`);
-}
-else if (operacion == 3) {
-	let numero1 = prompt("primer número para dividir");
-	let numero2 = prompt("segundo número para dividir");
-	resultado = dividir(numero1,numero2)
-	alert(`tu resultado es ${resultado}`);
-}
-else if (operacion == 4) {
-	let numero1 = prompt("primer número para multiplicar");
-	let numero2 = prompt("segundo número para multiplicar");
-	resultado = multiplicar(numero1,numero2)
-	alert(`tu resultado es ${resultado}`);
-}
-else if(operacion == 5){
-	let numero1 = prompt("primer número para multiplicar");
-	let numero2 = prompt("segundo número para multiplicar");
-    resultado = potencia(numero1,numero2)
-    alert(`tu resultado es ${resultado}`);
-}
-else if(operacion == 6){
-    let numero1 = prompt("ingrese el numero para calcular su raiz cuadrada");
-    resultado = raizCuadrada(numero1)
-    alert(`tu resultado es ${resultado}`);
-}
-else if(operacion == 7){
-    let numero1 = prompt("ingrese el numero para cancular su raiz cubica")
-    resultado = raizCubica(numero1)
-    alert(`tu resultado es ${resultado}`);
-}
-else{
-	alert("no se ha encontrado la operación");
-}
+mostrarInformacion("fisica")
+mostrarInformacion("programacion")
+mostrarInformacion("logica")
+mostrarInformacion("quimica")
+document.write(cantidadDeClases("leandro"))
+document.write(cantidadDeClases("jose"))
